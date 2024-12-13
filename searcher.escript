@@ -59,9 +59,9 @@ check_folder(Dirs) ->
 check_results(Results) ->
 	lists:foreach(fun (Result) -> validate_directory(Result) end, Results).
 
-validate_directory(true) ->
+validate_directory(Boolean) when Boolean == true ->
 	ok;
-validate_directory(false) ->
+validate_directory(Boolean) when Boolean == false ->
 	exit(some_folder_argument_is_not_a_directory).
 
 recursive_find_files(Folder,Regex) ->
@@ -71,3 +71,6 @@ recursive_find_files(Folder,Regex) ->
 		io:format("File ~p: ~s~n", [Acc, File]),
 		Acc + 1
 	end, 1)]).
+
+% Add this validation and then add commments...
+% https://www.erlang.org/doc/apps/stdlib/filelib.html#ensure_dir/1
