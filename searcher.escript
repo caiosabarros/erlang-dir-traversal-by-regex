@@ -4,10 +4,12 @@ main(Args) ->
 	case Args of
 		[Folder,Regex] -> 
 			io:format("Args ~p~n",[Args]),
+			Results = check_folder(Folder),
 			recursive_find_files(Folder, Regex);
 		[Folder, SecondFolder, Regex] -> 
 			io:format("Args ~p~n",[Args]),
 			Folders = [Folder, SecondFolder],
+			Results = check_folder(Folders),
 			tupelize = fun(X) -> {X, Regex} end,
 			FoldersWithRegex = lists:map(tupelize, Folders),
 			lists:map(recursive_find_files, FoldersWithRegex);
@@ -41,6 +43,10 @@ usage() ->
 	io:format("--- If you want to search in two folders simultenously, do the below ---~n"),
 	io:format("$ ./searcher.escript /path/to/folder1 /path/to/folder2 regex-pattern-here~n"),
 	io:format("--- And so on up to five different folders ---~n").
+	io:format("OPS: All folder paths must be paths to folders. ---~n").
+
+check_folder(Dirs) ->
+	lists:map(fun(Dir) -> filelib:is_dir(Dir) end, Dirs).
 
 recursive_find_files(Folder,Regex) ->
 	% transform the second parameter of io:format into a list so we have it all logged out
