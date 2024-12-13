@@ -1,0 +1,4 @@
+#!/usr/bin/env escript
+
+main([String]) ->
+	io:format("Hello, ~p~n",[String]).
