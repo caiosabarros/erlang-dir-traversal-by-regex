@@ -49,4 +49,5 @@ This project uses some of Erlang's basic functionality and concepts, like the fo
 - [x] Using lambda functions with lists:map, lists:filter, or lists:fold (used lists:map multiple times)
 
 Additionally, it makes use of the:
+
 -[x] `case of` coding block
